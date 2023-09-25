@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ApplicationEssay</title>
+</head>
+<body>
+
+<h4>Application Form - Essay</h4>
+<p>Please explain your motivation!</p>
+
+<form action="/marsgate/applicationConfirmation" method="post">
+
+    <input type="hidden" th:value="${Id}" name="Id">
+
+    <textarea id="essay" name="essay" rows="5" cols="50" placeholder="This is the default text"></textarea> <br>
+
+    <button type="submit" >Submit Application</button>
+    <button type="submit" formaction="/marsgate/cancel" formmethod="get">Cancel Application</button>
+</form>
+
+</body>
+</html>

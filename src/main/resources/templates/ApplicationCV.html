@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ApplicationCV</title>
+</head>
+<body>
+
+<h4>Application Form - CV</h4>
+<p>Please fill in your information!</p>
+
+<form action="/marsgate/applicationPersonalDetails" method="post">
+<label for="firstname">First name:</label>
+<input id="firstname" type="text" name="firstname"> <br>
+
+<label for="lastname">Last name:</label>
+<input id="lastname" type="text" name="lastname"> <br>
+
+<label for="experience">Years of experience: </label>
+<input id="experience" type="number" name="experience"> <br>
+
+<label for="university">University degree:</label>
+<input id="university" type="text" name="university"> <br>
+
+<button type="submit" >Save and Proceed</button>
+<button type="submit" formaction="/marsgate" formmethod="get">Cancel Application</button>
+</form>
+
+</body>
+</html>
