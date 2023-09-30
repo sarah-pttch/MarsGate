@@ -9,21 +9,22 @@
 <h4>Application Form - Personal Details</h4>
 <p>Please fill in your personal details!</p>
 
-<form action="/marsgate/applicationEssay" method="post">
+<form action="/marsgate/applicationCV" method="post">
 
-    <input type="hidden" th:value="${Id}" name="Id">
+    <label for="firstname">First name:</label>
+    <input id="firstname" type="text" name="firstname"> <br>
 
-    <label for="telephone">Telephone number:</label>
-    <input id="telephone" type="text" name="telephone"> <br>
+    <label for="lastname">Last name:</label>
+    <input id="lastname" type="text" name="lastname"> <br>
 
     <label for="email">E-Mail address:</label>
     <input id="email" type="email" name="email"> <br>
 
-    <label for="birthdate">Birth date:</label>
-    <input id="birthdate" type="date" name="birthdate"> <br>
+    <label for="telephone">Telephone number:</label>
+    <input id="telephone" type="text" name="telephone"> <br>
 
     <button type="submit">Save and Proceed</button>
-    <button type="submit" formaction="/marsgate/cancel" formmethod="get">Cancel Application</button>
+    <button type="submit" formaction="/marsgate" formmethod="get">Cancel Application</button>
 </form>
 
 </body>

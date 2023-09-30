@@ -20,13 +20,13 @@ public class ApplicationRepository {
         return em.merge(application);
     }
 
-    public Application addApplicationPersonalDetails (Application application) {
-        Query updatePD = em.createNamedQuery("updatePersonalDetails");
-        updatePD.setParameter("telephone", application.getTelephone());
-        updatePD.setParameter("email", application.getEmail());
-        updatePD.setParameter("birthdate", application.getBirthdate());
-        updatePD.setParameter("Id", application.getId());
-        updatePD.executeUpdate();
+    public Application addApplicationCV (Application application) {
+        Query updateCV = em.createNamedQuery("updateCV");
+        updateCV.setParameter("experience", application.getExperience());
+        updateCV.setParameter("university", application.getUniversity());
+        updateCV.setParameter("birthdate", application.getBirthdate());
+        updateCV.setParameter("Id", application.getId());
+        updateCV.executeUpdate();
         return getApplicationById(application.getId());
     }
 

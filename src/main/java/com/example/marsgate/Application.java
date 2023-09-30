@@ -10,7 +10,7 @@ import java.sql.Date;
 
 @Entity
 @NamedQuery(name = "findapplications", query = "select a from Application a where a.firstname=:firstname AND a.lastname=:lastname")
-@NamedQuery(name = "updatePersonalDetails", query = "update Application a set a.telephone=:telephone, a.email=:email, a.birthdate=:birthdate where a.Id=:Id")
+@NamedQuery(name = "updateCV", query = "update Application a set a.experience=:experience, a.university=:university, a.birthdate=:birthdate where a.Id=:Id")
 @NamedQuery(name = "updateEssay", query = "update Application a set a.essay=:essay where a.Id=:Id")
 public class Application {
 

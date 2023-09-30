@@ -15,8 +15,8 @@ public class MarsGateService {
         return ar.createApplication(application);
     }
 
-    public Application addPersonalDetails(Application application) {
-        return ar.addApplicationPersonalDetails(application);
+    public Application addCV(Application application) {
+        return ar.addApplicationCV(application);
     }
 
     public Application addEssay(Application application) {

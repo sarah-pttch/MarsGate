@@ -12,9 +12,6 @@ import java.util.List;
 public class MarsGateController {
 
     @Autowired
-    ApplicationRepository ar;
-
-    @Autowired
     MarsGateService service;
 
     @GetMapping
@@ -22,9 +19,9 @@ public class MarsGateController {
         return "Startpage";
     }
 
-    @GetMapping("/applicationCV")
-    public String openApplicationCV() {
-        return "ApplicationCV";
+    @GetMapping("/applicationPersonalDetails")
+    public String openApplicationPD() {
+        return "ApplicationPersonalDetails";
     }
 
     @GetMapping("/checkApplications")
@@ -32,18 +29,18 @@ public class MarsGateController {
         return "CheckApplications";
     }
 
-    @PostMapping("/applicationPersonalDetails")
-    public String saveCv(@ModelAttribute Application application, Model model) {
-        Application newApplication = service.createApplication(application);
-        model.addAttribute("Id", newApplication.getId());
-        return "ApplicationPersonalDetails";
-    }
-
     @PostMapping("/applicationEssay")
-    public String savePersonalDetails(@ModelAttribute Application application, Model model) {
-        Application updatedApplication = service.addPersonalDetails(application);
+    public String saveCv(@ModelAttribute Application application, Model model) {
+        Application updatedApplication = service.addCV(application);
         model.addAttribute("Id", updatedApplication.getId());
         return "ApplicationEssay";
+    }
+
+    @PostMapping("/applicationCV")
+    public String savePersonalDetails(@ModelAttribute Application application, Model model) {
+        Application newApplication = service.createApplication(application);
+        model.addAttribute("Id", newApplication.getId());
+        return "ApplicationCV";
     }
 
     @PostMapping("/applicationConfirmation")
