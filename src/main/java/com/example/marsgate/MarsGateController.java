@@ -41,7 +41,6 @@ public class MarsGateController {
 
     @PostMapping("/applicationEssay")
     public String savePersonalDetails(@ModelAttribute Application application, Model model) {
-//        Application updatedApplication = ar.addApplicationPersonalDetails(application);
         Application updatedApplication = service.addPersonalDetails(application);
         model.addAttribute("Id", updatedApplication.getId());
         return "ApplicationEssay";
@@ -49,8 +48,7 @@ public class MarsGateController {
 
     @PostMapping("/applicationConfirmation")
     public String saveEssay(@ModelAttribute Application application, Model model) {
-        ar.addApplicationEssay(application);
-        Application summary = ar.getApplicationById(application.getId());
+        Application summary = service.addEssay(application);
         model.addAttribute("firstname", summary.getFirstname());
         model.addAttribute("lastname", summary.getLastname());
         model.addAttribute("experience", summary.getExperience());
@@ -65,13 +63,13 @@ public class MarsGateController {
     @GetMapping("/existingApplications")
     @ResponseBody
     public String findExistingApplications(@RequestParam String firstname, @RequestParam String lastname) {
-        List<Application> results = ar.getApplications(firstname, lastname);
-        return results.toString();
+//        List<Application> results = service.findApplications(firstname, lastname);
+        return service.findApplications(firstname, lastname);
     }
 
     @GetMapping("/cancel")
     public String cancelApplication(@RequestParam int Id) {
-        ar.deleteApplicationById(Id);
+        service.deleteApplication(Id);
         return "redirect:/marsgate";
     }
 
