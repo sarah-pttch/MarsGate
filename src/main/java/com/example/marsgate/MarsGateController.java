@@ -31,20 +31,21 @@ public class MarsGateController {
 
     @PostMapping("/applicationEssay")
     public String saveCv(@ModelAttribute Application application, Model model) {
+        System.out.println(application.getBirthdate());
         Application updatedApplication = service.addCV(application);
         model.addAttribute("Id", updatedApplication.getId());
         return "ApplicationEssay";
     }
 
     @PostMapping("/applicationCV")
-    public String savePersonalDetails(@ModelAttribute Application application, Model model) {
+    public String savePersonalDetails(@ModelAttribute Application application, Model model) throws TelTooLongException{
         Application newApplication = service.createApplication(application);
         model.addAttribute("Id", newApplication.getId());
         return "ApplicationCV";
     }
 
     @PostMapping("/applicationConfirmation")
-    public String saveEssay(@ModelAttribute Application application, Model model) {
+    public String saveEssay(@ModelAttribute Application application, Model model) throws EssayTooLongException {
         Application summary = service.addEssay(application);
         model.addAttribute("firstname", summary.getFirstname());
         model.addAttribute("lastname", summary.getLastname());
@@ -59,9 +60,10 @@ public class MarsGateController {
 
     @GetMapping("/existingApplications")
     @ResponseBody
-    public String findExistingApplications(@RequestParam String firstname, @RequestParam String lastname) {
-//        List<Application> results = service.findApplications(firstname, lastname);
-        return service.findApplications(firstname, lastname);
+    public String findExistingApplications(@RequestParam String email) {
+        List<Application> results = service.findApplications(email);
+//        return service.findApplications(firstname, lastname);
+        return results.toString();
     }
 
     @GetMapping("/cancel")

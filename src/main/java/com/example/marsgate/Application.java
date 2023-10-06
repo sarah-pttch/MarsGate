@@ -1,15 +1,13 @@
 package com.example.marsgate;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.NamedQuery;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
 import java.sql.Date;
 
 @Entity
-@NamedQuery(name = "findapplications", query = "select a from Application a where a.firstname=:firstname AND a.lastname=:lastname")
+@NamedQuery(name = "findapplications", query = "select a from Application a where a.email=:email")
 @NamedQuery(name = "updateCV", query = "update Application a set a.experience=:experience, a.university=:university, a.birthdate=:birthdate where a.Id=:Id")
 @NamedQuery(name = "updateEssay", query = "update Application a set a.essay=:essay where a.Id=:Id")
 public class Application {
@@ -17,13 +15,22 @@ public class Application {
     @Id
     @GeneratedValue
     private int Id;
+    @NotNull
     private String firstname;
+    @NotNull
     private String lastname;
+//    @Column(columnDefinition = "integer default 0")
     private int experience;
+    @Column(columnDefinition = "varchar(100) default 'no degree entered'")
     private String university;
+    @Column(columnDefinition = "varchar(25) default 'no telephone number entered'")
     private String telephone;
+    @NotNull
+    @Email
     private String email;
+//    @Column(columnDefinition = "date default '1900-01-01'")
     private Date birthdate;
+    @Column(columnDefinition = "varchar(1000) default 'no essay added'")
     private String essay;
 
     public int getId() {
@@ -110,6 +117,6 @@ public class Application {
                 ", email='" + email + '\'' +
                 ", birthdate=" + birthdate +
                 ", essay='" + essay + '\'' +
-                '}';
+                "}\n";
     }
 }

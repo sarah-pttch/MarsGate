@@ -46,10 +46,9 @@ public class ApplicationRepository {
         em.remove(application);
     }
 
-    public List<Application> getApplications(String firstname, String lastname) {
+    public List<Application> getApplications(String email) {
         TypedQuery<Application> getAppByFnLn = em.createNamedQuery("findapplications", Application.class);
-        getAppByFnLn.setParameter("firstname", firstname);
-        getAppByFnLn.setParameter("lastname", lastname);
+        getAppByFnLn.setParameter("email", email);
         return getAppByFnLn.getResultList();
     }
 
