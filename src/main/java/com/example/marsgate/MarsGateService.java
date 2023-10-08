@@ -3,13 +3,11 @@ package com.example.marsgate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class MarsGateService {
+public class MarsGateService implements ServiceInterface {
 
     @Autowired
-    ApplicationRepository ar;
+    RepositoryInterface ar;
 
     public Application createApplication(Application application) throws TelTooLongException{
         if(application.getTelephone().length()>25) {
@@ -21,11 +19,14 @@ public class MarsGateService {
         return ar.createApplication(application);
     }
 
-    public Application addCV(Application application) {
+    public Application addCV(Application application) throws UniTooLongException {
+        if(application.getUniversity().length() > 100) {
+            throw new UniTooLongException();
+        }
         if(application.getUniversity().equals("")) {
             application.setUniversity("no degree entered");
         }
-        return ar.addApplicationCV(application);
+        return ar.addCV(application);
     }
 
     public Application addEssay(Application application) throws EssayTooLongException {
@@ -35,12 +36,12 @@ public class MarsGateService {
         if(application.getEssay().equals("")) {
             application.setEssay("no essay added");
         }
-        ar.addApplicationEssay(application);
+        ar.addEssay(application);
         return ar.getApplicationById(application.getId());
     }
 
-    public List<Application> findApplications(String email) {
-        return ar.getApplications(email);
+    public String findApplications(String email) {
+        return ar.getApplicationsByEmail(email).toString();
 //        List<Application> results = ar.getApplications(firstname, lastname);
 //        String allApplications = "";
 //        for(Application application : results) {

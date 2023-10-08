@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class ApplicationRepository {
+public class ApplicationRepository implements RepositoryInterface {
 
     @PersistenceContext
     EntityManager em;
@@ -20,7 +20,7 @@ public class ApplicationRepository {
         return em.merge(application);
     }
 
-    public Application addApplicationCV (Application application) {
+    public Application addCV (Application application) {
         Query updateCV = em.createNamedQuery("updateCV");
         updateCV.setParameter("experience", application.getExperience());
         updateCV.setParameter("university", application.getUniversity());
@@ -30,7 +30,7 @@ public class ApplicationRepository {
         return getApplicationById(application.getId());
     }
 
-    public void addApplicationEssay (Application application) {
+    public void addEssay (Application application) {
         Query updateEssay = em.createNamedQuery("updateEssay");
         updateEssay.setParameter("essay", application.getEssay());
         updateEssay.setParameter("Id", application.getId());
@@ -46,7 +46,7 @@ public class ApplicationRepository {
         em.remove(application);
     }
 
-    public List<Application> getApplications(String email) {
+    public List<Application> getApplicationsByEmail(String email) {
         TypedQuery<Application> getAppByFnLn = em.createNamedQuery("findapplications", Application.class);
         getAppByFnLn.setParameter("email", email);
         return getAppByFnLn.getResultList();

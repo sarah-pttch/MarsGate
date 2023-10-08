@@ -5,14 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/marsgate")
 public class MarsGateController {
 
     @Autowired
-    MarsGateService service;
+    ServiceInterface service;
 
     @GetMapping
     public String openStartPage() {
@@ -30,8 +28,7 @@ public class MarsGateController {
     }
 
     @PostMapping("/applicationEssay")
-    public String saveCv(@ModelAttribute Application application, Model model) {
-        System.out.println(application.getBirthdate());
+    public String saveCv(@ModelAttribute Application application, Model model) throws UniTooLongException {
         Application updatedApplication = service.addCV(application);
         model.addAttribute("Id", updatedApplication.getId());
         return "ApplicationEssay";
@@ -61,9 +58,12 @@ public class MarsGateController {
     @GetMapping("/existingApplications")
     @ResponseBody
     public String findExistingApplications(@RequestParam String email) {
-        List<Application> results = service.findApplications(email);
+        String results = service.findApplications(email);
+        if(results.equals("[]")) {
+            return "There are no applications for your e-mail address.";
+        }
 //        return service.findApplications(firstname, lastname);
-        return results.toString();
+        return results;
     }
 
     @GetMapping("/cancel")
