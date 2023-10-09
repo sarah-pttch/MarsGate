@@ -117,6 +117,6 @@ public class Application {
                 ", email='" + email + '\'' +
                 ", birthdate=" + birthdate +
                 ", essay='" + essay + '\'' +
-                "}\n";
+                "}";
     }
 }

@@ -14,7 +14,7 @@ public class MarsGateService implements ServiceInterface {
             throw new TelTooLongException();
         }
         if(application.getTelephone().equals("")) {
-            application.setTelephone("no telephone number entered");
+            application.setTelephone("no telephone number");
         }
         return ar.createApplication(application);
     }
@@ -49,6 +49,17 @@ public class MarsGateService implements ServiceInterface {
 //            allApplications += "\r\n";
 //        }
 //        return allApplications;
+    }
+
+    public String findApplications(int Id) {
+        Application application = ar.getApplicationById(Id);
+        if(application.getUniversity() == null){
+            return "ApplicationCV";
+        } else if(application.getEssay() == null) {
+            return "ApplicationEssay";
+        } else {
+            return "ApplicationNotModifiable";
+        }
     }
 
     public void deleteApplication(int Id) {

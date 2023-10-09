@@ -10,5 +10,16 @@
 
 <p th:text="${results}">results</p>
 
+<form action="/marsgate/proceedWithApplication" method="get">
+
+    <h4>Want to proceed with one of the existing applications?</h4>
+    <label for="proceedId">Type in the ID of the application:</label>
+    <input id="proceedId" type="number" required name="Id"> <br>
+    <button type="submit">Proceed</button>
+
+</form>
+<br>
+<a href="/marsgate">Return to Startpage</a>
+
 </body>
 </html>

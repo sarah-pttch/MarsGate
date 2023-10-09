@@ -10,5 +10,7 @@ public interface ServiceInterface {
 
     String findApplications(String email);
 
+    String findApplications(int Id);
+
     void deleteApplication(int Id);
 }

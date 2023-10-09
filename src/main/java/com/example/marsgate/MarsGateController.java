@@ -55,15 +55,30 @@ public class MarsGateController {
         return "ApplicationConfirmation";
     }
 
+//    @GetMapping("/existingApplications")
+//    @ResponseBody
+//    public String findExistingApplications(@RequestParam String email) {
+//        String results = service.findApplications(email);
+//        if(results.equals("[]")) {
+//            return "There are no applications for your e-mail address.";
+//        }
+//        return results;
+//    }
+
     @GetMapping("/existingApplications")
-    @ResponseBody
-    public String findExistingApplications(@RequestParam String email) {
+    public String findExistingApplications(@RequestParam String email, Model model) {
         String results = service.findApplications(email);
         if(results.equals("[]")) {
-            return "There are no applications for your e-mail address.";
+            return "NoApplicationsFound";
         }
-//        return service.findApplications(firstname, lastname);
-        return results;
+        model.addAttribute("results", results);
+        return "ExistingApplications";
+    }
+
+    @GetMapping("/proceedWithApplication")
+    public String testing(@RequestParam int Id, Model model) {
+        model.addAttribute("Id", Id);
+        return service.findApplications(Id);
     }
 
     @GetMapping("/cancel")
