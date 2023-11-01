@@ -30,6 +30,7 @@ public class MarsGateController {
     @PostMapping("/applicationEssay")
     public String saveCv(@ModelAttribute Application application, Model model) throws UniTooLongException {
         Application updatedApplication = service.addCV(application);
+        System.out.println(application.getBirthdate());
         model.addAttribute("Id", updatedApplication.getId());
         return "ApplicationEssay";
     }

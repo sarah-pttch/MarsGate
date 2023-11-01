@@ -62,6 +62,10 @@ public class MarsGateService implements ServiceInterface {
         }
     }
 
+    public Application findApplicationById(int Id) {
+        return ar.getApplicationById(Id);
+    }
+
     public void deleteApplication(int Id) {
         ar.deleteApplicationById(Id);
     }
