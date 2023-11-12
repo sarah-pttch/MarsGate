@@ -1,16 +1,17 @@
 package com.example.marsgate;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RepositoryInterface {
 
-    Application createApplication(Application application);
+    Optional<Application> createApplication(Application application);
 
-    Application addCV(Application application);
+    Optional<Application> addCV(Application application);
 
     void addEssay(Application application);
 
-    Application getApplicationById(int Id);
+    Optional<Application> getApplicationById(int Id);
 
     void deleteApplicationById(int Id);
 

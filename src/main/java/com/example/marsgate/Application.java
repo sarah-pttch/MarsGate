@@ -33,11 +33,23 @@ public class Application {
     @Column(columnDefinition = "varchar(1000) default 'no essay added'")
     private String essay;
 
+    public Application(){}
+
     public Application(String firstname, String lastname, String telephone, String email) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.telephone = telephone;
         this.email = email;
+    }
+
+    public Application(Date birthdate, int experience, String university) {
+        this.birthdate = birthdate;
+        this.experience = experience;
+        this.university = university;
+    }
+
+    public Application(String essay) {
+        this.essay = essay;
     }
 
     public int getId() {

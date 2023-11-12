@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional
@@ -16,11 +17,17 @@ public class ApplicationRepository implements RepositoryInterface {
     @PersistenceContext
     EntityManager em;
 
-    public Application createApplication(Application application) {
-        return em.merge(application);
+    public Optional<Application> createApplication(Application application) {
+//        try {
+        return Optional.of(em.merge(application));
+//        } catch (Exception e) {
+//            //TODO: introduce logging library.
+//           // Logger.error("failed to create application", application.getEmail());
+//            return Optional.empty();
+//        }
     }
 
-    public Application addCV (Application application) {
+    public Optional<Application> addCV (Application application) {
         Query updateCV = em.createNamedQuery("updateCV");
         updateCV.setParameter("experience", application.getExperience());
         updateCV.setParameter("university", application.getUniversity());
@@ -37,8 +44,8 @@ public class ApplicationRepository implements RepositoryInterface {
         updateEssay.executeUpdate();
     }
 
-    public Application getApplicationById(int id) {
-        return em.find(Application.class, id);
+    public Optional<Application> getApplicationById(int id) {
+        return Optional.of(em.find(Application.class, id));
     }
 
     public void deleteApplicationById(int id) {

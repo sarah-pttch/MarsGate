@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/marsgate")
 public class MarsGateController {
@@ -29,30 +31,34 @@ public class MarsGateController {
 
     @PostMapping("/applicationEssay")
     public String saveCv(@ModelAttribute Application application, Model model) throws UniTooLongException {
-        Application updatedApplication = service.addCV(application);
-        System.out.println(application.getBirthdate());
-        model.addAttribute("Id", updatedApplication.getId());
+        Optional<Application> updatedApplication = service.addCV(application);
+        model.addAttribute("Id", updatedApplication.get().getId());
         return "ApplicationEssay";
     }
 
     @PostMapping("/applicationCV")
     public String savePersonalDetails(@ModelAttribute Application application, Model model) throws TelTooLongException{
-        Application newApplication = service.createApplication(application);
-        model.addAttribute("Id", newApplication.getId());
-        return "ApplicationCV";
+        //TODO: learn about optionals.
+        Optional<Application> newApplication = service.createApplication(application);
+        if (newApplication.isPresent()) {
+            model.addAttribute("Id", newApplication.get().getId());
+            return "ApplicationCV";
+        } else {
+            return null;
+        }
     }
 
     @PostMapping("/applicationConfirmation")
     public String saveEssay(@ModelAttribute Application application, Model model) throws EssayTooLongException {
-        Application summary = service.addEssay(application);
-        model.addAttribute("firstname", summary.getFirstname());
-        model.addAttribute("lastname", summary.getLastname());
-        model.addAttribute("experience", summary.getExperience());
-        model.addAttribute("university", summary.getUniversity());
-        model.addAttribute("telephone", summary.getTelephone());
-        model.addAttribute("email", summary.getEmail());
-        model.addAttribute("birthdate", summary.getBirthdate());
-        model.addAttribute("essay", summary.getEssay());
+        Optional<Application> summary = service.addEssay(application);
+        model.addAttribute("firstname", summary.get().getFirstname());
+        model.addAttribute("lastname", summary.get().getLastname());
+        model.addAttribute("experience", summary.get().getExperience());
+        model.addAttribute("university", summary.get().getUniversity());
+        model.addAttribute("telephone", summary.get().getTelephone());
+        model.addAttribute("email", summary.get().getEmail());
+        model.addAttribute("birthdate", summary.get().getBirthdate());
+        model.addAttribute("essay", summary.get().getEssay());
         return "ApplicationConfirmation";
     }
 
@@ -77,9 +83,9 @@ public class MarsGateController {
     }
 
     @GetMapping("/proceedWithApplication")
-    public String testing(@RequestParam int Id, Model model) {
+    public String openApplication(@RequestParam int Id, Model model) {
         model.addAttribute("Id", Id);
-        return service.findApplications(Id);
+        return service.openApplication(Id);
     }
 
     @GetMapping("/cancel")

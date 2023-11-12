@@ -3,13 +3,19 @@ package com.example.marsgate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MarsGateService implements ServiceInterface {
 
-    @Autowired
-    RepositoryInterface ar;
+    private final RepositoryInterface ar;
 
-    public Application createApplication(Application application) throws TelTooLongException{
+    @Autowired
+    public MarsGateService(RepositoryInterface ar) {
+        this.ar = ar;
+    }
+
+    public Optional<Application> createApplication(Application application) throws TelTooLongException{
         if(application.getTelephone().length()>25) {
             throw new TelTooLongException();
         }
@@ -19,7 +25,7 @@ public class MarsGateService implements ServiceInterface {
         return ar.createApplication(application);
     }
 
-    public Application addCV(Application application) throws UniTooLongException {
+    public Optional<Application> addCV(Application application) throws UniTooLongException {
         if(application.getUniversity().length() > 100) {
             throw new UniTooLongException();
         }
@@ -29,7 +35,7 @@ public class MarsGateService implements ServiceInterface {
         return ar.addCV(application);
     }
 
-    public Application addEssay(Application application) throws EssayTooLongException {
+    public Optional<Application> addEssay(Application application) throws EssayTooLongException {
         if(application.getEssay().length() > 10) {
             throw new EssayTooLongException();
         }
@@ -42,29 +48,22 @@ public class MarsGateService implements ServiceInterface {
 
     public String findApplications(String email) {
         return ar.getApplicationsByEmail(email).toString();
-//        List<Application> results = ar.getApplications(firstname, lastname);
-//        String allApplications = "";
-//        for(Application application : results) {
-//            allApplications += application.toString();
-//            allApplications += "\r\n";
-//        }
-//        return allApplications;
     }
 
-    public String findApplications(int Id) {
-        Application application = ar.getApplicationById(Id);
-        if(application.getUniversity() == null){
+    public String openApplication(int Id) {
+        Optional<Application> application = ar.getApplicationById(Id);
+        if(application.get().getUniversity() == null){
             return "ApplicationCV";
-        } else if(application.getEssay() == null) {
+        } else if(application.get().getEssay() == null) {
             return "ApplicationEssay";
         } else {
             return "ApplicationNotModifiable";
         }
     }
 
-    public Application findApplicationById(int Id) {
-        return ar.getApplicationById(Id);
-    }
+//    public Optional<Application> findApplicationById(int Id) {
+//        return ar.getApplicationById(Id);
+//    }
 
     public void deleteApplication(int Id) {
         ar.deleteApplicationById(Id);
