@@ -1,5 +1,6 @@
 package com.example.marsgate;
 
+import Logs.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,16 +30,9 @@ public class MarsGateController {
         return "CheckApplications";
     }
 
-    @PostMapping("/applicationEssay")
-    public String saveCv(@ModelAttribute Application application, Model model) throws UniTooLongException {
-        Optional<Application> updatedApplication = service.addCV(application);
-        model.addAttribute("Id", updatedApplication.get().getId());
-        return "ApplicationEssay";
-    }
-
     @PostMapping("/applicationCV")
-    public String savePersonalDetails(@ModelAttribute Application application, Model model) throws TelTooLongException{
-        //TODO: learn about optionals.
+    public String savePersonalDetails(@ModelAttribute Application application, Model model) throws TelTooLongException {
+        Log.info("Starting creation of application");
         Optional<Application> newApplication = service.createApplication(application);
         if (newApplication.isPresent()) {
             model.addAttribute("Id", newApplication.get().getId());
@@ -46,6 +40,13 @@ public class MarsGateController {
         } else {
             return null;
         }
+    }
+
+    @PostMapping("/applicationEssay")
+    public String saveCv(@ModelAttribute Application application, Model model) throws UniTooLongException {
+        Optional<Application> updatedApplication = service.addCV(application);
+        model.addAttribute("Id", updatedApplication.get().getId());
+        return "ApplicationEssay";
     }
 
     @PostMapping("/applicationConfirmation")
@@ -90,7 +91,9 @@ public class MarsGateController {
 
     @GetMapping("/cancel")
     public String cancelApplication(@RequestParam int Id) {
+        Log.info("Deleting application");
         service.deleteApplication(Id);
+        Log.info("Application successfully deleted");
         return "redirect:/marsgate";
     }
 

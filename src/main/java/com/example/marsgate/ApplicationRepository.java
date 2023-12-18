@@ -1,5 +1,6 @@
 package com.example.marsgate;
 
+import Logs.Log;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -18,13 +19,14 @@ public class ApplicationRepository implements RepositoryInterface {
     EntityManager em;
 
     public Optional<Application> createApplication(Application application) {
-//        try {
+        try {
         return Optional.of(em.merge(application));
-//        } catch (Exception e) {
-//            //TODO: introduce logging library.
-//           // Logger.error("failed to create application", application.getEmail());
-//            return Optional.empty();
-//        }
+        } catch (Exception e) {
+            //TODO: introduce logging library.
+           // Logger.error("failed to create application", application.getEmail());
+            Log.error("Failed to create application");
+            return Optional.empty();
+        }
     }
 
     public Optional<Application> addCV (Application application) {

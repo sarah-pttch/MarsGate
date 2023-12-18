@@ -1,6 +1,5 @@
 package com.example.marsgate;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,7 +11,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 //TODO: If you want to run an e2e test then you need to start a in memory db when running these tests.
 //Types of tests. Unit, integration and e2e tests.
@@ -23,11 +22,6 @@ public class MarsGateServiceTest {
     RepositoryInterface ar;
     @InjectMocks
     MarsGateService marsGateService;
-
-//    @BeforeEach
-//    void setUp() {
-//        marsGateService = new MarsGateService(ar);
-//    }
 
     @Test
     public void testCreateApplication_Correct() throws TelTooLongException {
@@ -67,5 +61,12 @@ public class MarsGateServiceTest {
         Application application = new Application(new Date(1988-02-12), 9, null);
         when(ar.getApplicationById(1)).thenReturn(Optional.of(application));
         assertEquals("ApplicationCV", marsGateService.openApplication(1));
+    }
+
+    @Test
+    public void testDeleteApplication_Correct() {
+        doNothing().when(ar).deleteApplicationById(1);
+        marsGateService.deleteApplication(1);
+        verify(ar, times(1)).deleteApplicationById(1);
     }
 }

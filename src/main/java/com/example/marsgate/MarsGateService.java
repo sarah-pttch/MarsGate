@@ -36,7 +36,7 @@ public class MarsGateService implements ServiceInterface {
     }
 
     public Optional<Application> addEssay(Application application) throws EssayTooLongException {
-        if(application.getEssay().length() > 10) {
+        if(application.getEssay().length() > 1000) {
             throw new EssayTooLongException();
         }
         if(application.getEssay().equals("")) {
@@ -60,10 +60,6 @@ public class MarsGateService implements ServiceInterface {
             return "ApplicationNotModifiable";
         }
     }
-
-//    public Optional<Application> findApplicationById(int Id) {
-//        return ar.getApplicationById(Id);
-//    }
 
     public void deleteApplication(int Id) {
         ar.deleteApplicationById(Id);
