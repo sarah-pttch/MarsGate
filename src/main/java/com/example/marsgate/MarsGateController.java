@@ -1,6 +1,9 @@
 package com.example.marsgate;
 
 import Logs.Log;
+import com.example.marsgate.requestdtos.ApplicationRequestDTO;
+import com.example.marsgate.service.ServiceInterface;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +34,7 @@ public class MarsGateController {
     }
 
     @PostMapping("/applicationCV")
-    public String savePersonalDetails(@ModelAttribute Application application, Model model) throws TelTooLongException {
+    public String savePersonalDetails(@Valid ApplicationRequestDTO application, Model model) throws TelTooLongException {
         Log.info("Starting creation of application");
         Optional<Application> newApplication = service.createApplication(application);
         if (newApplication.isPresent()) {

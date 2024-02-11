@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Entity
+
 @NamedQuery(name = "findapplications", query = "select a from Application a where a.email=:email")
 @NamedQuery(name = "updateCV", query = "update Application a set a.experience=:experience, a.university=:university, a.birthdate=:birthdate where a.Id=:Id")
 @NamedQuery(name = "updateEssay", query = "update Application a set a.essay=:essay where a.Id=:Id")

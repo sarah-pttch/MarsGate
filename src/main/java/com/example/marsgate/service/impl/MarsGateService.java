@@ -1,5 +1,9 @@
-package com.example.marsgate;
+package com.example.marsgate.service.impl;
 
+import com.example.marsgate.*;
+import com.example.marsgate.requestdtos.ApplicationRequestDTO;
+import com.example.marsgate.service.ServiceInterface;
+import com.example.marsgate.service.mappers.ApplicationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,20 +13,17 @@ import java.util.Optional;
 public class MarsGateService implements ServiceInterface {
 
     private final RepositoryInterface ar;
+    private final ApplicationMapper applicationMapper;
 
     @Autowired
-    public MarsGateService(RepositoryInterface ar) {
+    public MarsGateService(RepositoryInterface ar, ApplicationMapper applicationMapper) {
         this.ar = ar;
+        this.applicationMapper = applicationMapper;
     }
 
-    public Optional<Application> createApplication(Application application) throws TelTooLongException{
-        if(application.getTelephone().length()>25) {
-            throw new TelTooLongException();
-        }
-        if(application.getTelephone().equals("")) {
-            application.setTelephone("no telephone number");
-        }
-        return ar.createApplication(application);
+    public Optional<Application> createApplication(ApplicationRequestDTO application) throws TelTooLongException {
+        Application application1 = applicationMapper.mapRequestToEntity(application);
+        return ar.createApplication(application1);
     }
 
     public Optional<Application> addCV(Application application) throws UniTooLongException {
