@@ -1,4 +1,4 @@
-package com.example.marsgate;
+package com.example.marsgate.service.exceptions;
 
 import java.sql.SQLDataException;
 

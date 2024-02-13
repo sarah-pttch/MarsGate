@@ -1,6 +1,8 @@
-package com.example.marsgate;
+package com.example.marsgate.repository.impl;
 
 import Logs.Log;
+import com.example.marsgate.entity.Application;
+import com.example.marsgate.repository.RepositoryInterface;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;

@@ -1,6 +1,6 @@
 package com.example.marsgate.service.mappers;
 
-import com.example.marsgate.Application;
+import com.example.marsgate.entity.Application;
 import com.example.marsgate.requestdtos.ApplicationRequestDTO;
 import org.springframework.stereotype.Component;
 

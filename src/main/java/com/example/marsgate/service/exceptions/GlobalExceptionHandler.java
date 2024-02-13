@@ -1,4 +1,4 @@
-package com.example.marsgate;
+package com.example.marsgate.service.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

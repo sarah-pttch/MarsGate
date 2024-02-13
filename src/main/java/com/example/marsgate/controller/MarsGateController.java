@@ -1,6 +1,10 @@
-package com.example.marsgate;
+package com.example.marsgate.controller;
 
 import Logs.Log;
+import com.example.marsgate.entity.Application;
+import com.example.marsgate.service.exceptions.EssayTooLongException;
+import com.example.marsgate.service.exceptions.TelTooLongException;
+import com.example.marsgate.service.exceptions.UniTooLongException;
 import com.example.marsgate.requestdtos.ApplicationRequestDTO;
 import com.example.marsgate.service.ServiceInterface;
 import jakarta.validation.Valid;

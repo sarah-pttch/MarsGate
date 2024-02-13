@@ -1,4 +1,4 @@
-package com.example.marsgate;
+package com.example.marsgate.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;

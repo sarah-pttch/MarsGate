@@ -1,5 +1,6 @@
 package com.example.marsgate;
 
+import com.example.marsgate.controller.MarsGateController;
 import com.example.marsgate.service.ServiceInterface;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

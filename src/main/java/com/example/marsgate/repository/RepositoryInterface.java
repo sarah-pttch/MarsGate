@@ -1,4 +1,6 @@
-package com.example.marsgate;
+package com.example.marsgate.repository;
+
+import com.example.marsgate.entity.Application;
 
 import java.util.List;
 import java.util.Optional;

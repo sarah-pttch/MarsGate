@@ -4,7 +4,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import javax.crypto.Mac;
 import java.sql.Date;
 
 public class ApplicationRequestDTO {
