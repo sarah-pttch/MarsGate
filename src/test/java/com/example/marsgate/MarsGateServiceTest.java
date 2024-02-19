@@ -31,11 +31,11 @@ public class MarsGateServiceTest {
 
     @Test
     public void testCreateApplication_Correct() throws TelTooLongException {
-        ApplicationRequestDTO application = new ApplicationRequestDTO("Sarah", "W", "1", "sw@gmail.com");
-        Application application1 = new Application("Sarah", "W", "1", "sw@gmail.com");
-        when(applicationMapper.mapRequestToEntity(application)).thenReturn(application1);
-        when(ar.createApplication(application1)).thenReturn(Optional.of(application1));
-        Optional<Application> optionalApplication = marsGateService.createApplication(application);
+        ApplicationRequestDTO applicationRequestDTO = new ApplicationRequestDTO("Sarah", "W", "1", "sw@gmail.com");
+        Application application = new Application("Sarah", "W", "1", "sw@gmail.com");
+        when(applicationMapper.mapRequestToEntity(applicationRequestDTO)).thenReturn(application);
+        when(ar.createApplication(application)).thenReturn(Optional.of(application));
+        Optional<Application> optionalApplication = marsGateService.createApplication(applicationRequestDTO);
         assertTrue(optionalApplication.isPresent());
         assertEquals("1", optionalApplication.get().getTelephone());
     }

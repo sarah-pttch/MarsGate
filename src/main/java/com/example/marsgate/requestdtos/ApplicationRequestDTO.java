@@ -14,6 +14,7 @@ public class ApplicationRequestDTO {
     private String lastname;
     private int experience;
 
+    @Size(max = 100)
     private String university;
     @Size(max = 25, min = 1)
     private String telephone;
@@ -23,12 +24,30 @@ public class ApplicationRequestDTO {
     private Date birthdate;
     private String essay;
 
+
     public ApplicationRequestDTO(String firstname, String lastname, String telephone, String email) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.telephone = telephone;
         this.email = email;
     }
+//
+//    public ApplicationRequestDTO(Date birthdate, int experience, String university) {
+//        this.birthdate = birthdate;
+//        this.experience = experience;
+//        this.university = university;
+//    }
+
+//    public ApplicationRequestDTO(String firstname, String lastname, String telephone, String email, Date birthdate, int experience, String university, String essay){
+//        this.firstname = firstname;
+//        this.lastname = lastname;
+//        this.telephone = telephone;
+//        this.email = email;
+//        this.birthdate = birthdate;
+//        this.experience = experience;
+//        this.university = university;
+//        this.essay = essay;
+//    }
 
     public String getFirstname() {
         return firstname;

@@ -12,6 +12,9 @@
 <form action="/marsgate/applicationEssay" method="post">
 
     <input type="hidden" th:value="${Id}" name="Id">
+    <input type="hidden" name="firstname">
+    <input type="hidden" name="lastname">
+    <input type="hidden" name="email">
 
     <label for="birthdate">Birth date:</label>
     <input id="birthdate" type="date" value="1900-01-01" name="birthdate"> <br>

@@ -38,9 +38,9 @@ public class MarsGateController {
     }
 
     @PostMapping("/applicationCV")
-    public String savePersonalDetails(@Valid ApplicationRequestDTO application, Model model) throws TelTooLongException {
+    public String savePersonalDetails(@Valid ApplicationRequestDTO applicationRequestDTO, Model model) throws TelTooLongException {
         Log.info("Starting creation of application");
-        Optional<Application> newApplication = service.createApplication(application);
+        Optional<Application> newApplication = service.createApplication(applicationRequestDTO);
         if (newApplication.isPresent()) {
             model.addAttribute("Id", newApplication.get().getId());
             return "ApplicationCV";
@@ -50,24 +50,32 @@ public class MarsGateController {
     }
 
     @PostMapping("/applicationEssay")
-    public String saveCv(@ModelAttribute Application application, Model model) throws UniTooLongException {
-        Optional<Application> updatedApplication = service.addCV(application);
-        model.addAttribute("Id", updatedApplication.get().getId());
-        return "ApplicationEssay";
+    public String saveCv(@Valid ApplicationRequestDTO applicationRequestDTO, Model model) throws UniTooLongException {
+        Optional<Application> updatedApplication = service.addCV(applicationRequestDTO);
+        if(updatedApplication.isPresent()) {
+            model.addAttribute("Id", updatedApplication.get().getId());
+            return "ApplicationEssay";
+        } else {
+            return null;
+        }
     }
 
     @PostMapping("/applicationConfirmation")
-    public String saveEssay(@ModelAttribute Application application, Model model) throws EssayTooLongException {
-        Optional<Application> summary = service.addEssay(application);
-        model.addAttribute("firstname", summary.get().getFirstname());
-        model.addAttribute("lastname", summary.get().getLastname());
-        model.addAttribute("experience", summary.get().getExperience());
-        model.addAttribute("university", summary.get().getUniversity());
-        model.addAttribute("telephone", summary.get().getTelephone());
-        model.addAttribute("email", summary.get().getEmail());
-        model.addAttribute("birthdate", summary.get().getBirthdate());
-        model.addAttribute("essay", summary.get().getEssay());
-        return "ApplicationConfirmation";
+    public String saveEssay(@Valid ApplicationRequestDTO applicationRequestDTO, Model model) throws EssayTooLongException {
+        Optional<Application> summary = service.addEssay(applicationRequestDTO);
+        if(summary.isPresent()) {
+            model.addAttribute("firstname", summary.get().getFirstname());
+            model.addAttribute("lastname", summary.get().getLastname());
+            model.addAttribute("experience", summary.get().getExperience());
+            model.addAttribute("university", summary.get().getUniversity());
+            model.addAttribute("telephone", summary.get().getTelephone());
+            model.addAttribute("email", summary.get().getEmail());
+            model.addAttribute("birthdate", summary.get().getBirthdate());
+            model.addAttribute("essay", summary.get().getEssay());
+            return "ApplicationConfirmation";
+        } else {
+            return null;
+        }
     }
 
 //    @GetMapping("/existingApplications")

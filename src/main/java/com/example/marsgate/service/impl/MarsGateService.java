@@ -25,28 +25,30 @@ public class MarsGateService implements ServiceInterface {
         this.applicationMapper = applicationMapper;
     }
 
-    public Optional<Application> createApplication(ApplicationRequestDTO application) throws TelTooLongException {
-        Application application1 = applicationMapper.mapRequestToEntity(application);
-        return ar.createApplication(application1);
+    public Optional<Application> createApplication(ApplicationRequestDTO applicationRequestDTO) throws TelTooLongException {
+        Application application = applicationMapper.mapRequestToEntity(applicationRequestDTO);
+        return ar.createApplication(application);
     }
 
-    public Optional<Application> addCV(Application application) throws UniTooLongException {
-        if(application.getUniversity().length() > 100) {
-            throw new UniTooLongException();
-        }
-        if(application.getUniversity().equals("")) {
-            application.setUniversity("no degree entered");
-        }
+    public Optional<Application> addCV(ApplicationRequestDTO applicationRequestDTO) throws UniTooLongException {
+//        if(application.getUniversity().length() > 100) {
+//            throw new UniTooLongException();
+//        }
+//        if(application.getUniversity().equals("")) {
+//            application.setUniversity("no degree entered");
+//        }
+        Application application = applicationMapper.mapRequestToEntity(applicationRequestDTO);
         return ar.addCV(application);
     }
 
-    public Optional<Application> addEssay(Application application) throws EssayTooLongException {
-        if(application.getEssay().length() > 1000) {
-            throw new EssayTooLongException();
-        }
-        if(application.getEssay().equals("")) {
-            application.setEssay("no essay added");
-        }
+    public Optional<Application> addEssay(ApplicationRequestDTO applicationRequestDTO) throws EssayTooLongException {
+//        if(application.getEssay().length() > 1000) {
+//            throw new EssayTooLongException();
+//        }
+//        if(application.getEssay().equals("")) {
+//            application.setEssay("no essay added");
+//        }
+        Application application = applicationMapper.mapRequestToEntity(applicationRequestDTO);
         ar.addEssay(application);
         return ar.getApplicationById(application.getId());
     }

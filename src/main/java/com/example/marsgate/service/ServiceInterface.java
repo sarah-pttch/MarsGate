@@ -10,11 +10,11 @@ import java.util.Optional;
 
 public interface ServiceInterface {
 
-    Optional<Application> createApplication(ApplicationRequestDTO application) throws TelTooLongException;
+    Optional<Application> createApplication(ApplicationRequestDTO applicationRequestDTO) throws TelTooLongException;
 
-    Optional<Application> addCV(Application application) throws UniTooLongException;
+    Optional<Application> addCV(ApplicationRequestDTO applicationRequestDTO) throws UniTooLongException;
 
-    Optional<Application> addEssay(Application application) throws EssayTooLongException;
+    Optional<Application> addEssay(ApplicationRequestDTO applicationRequestDTO) throws EssayTooLongException;
 
     String findApplications(String email);
 
