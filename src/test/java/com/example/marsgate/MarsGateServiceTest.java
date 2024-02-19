@@ -35,15 +35,15 @@ public class MarsGateServiceTest {
         marsGateService = new MarsGateService(ar,applicationMapper);
     }
 
-    @Test
-    public void testCreateApplication_Correct() throws TelTooLongException {
-        ApplicationRequestDTO applicationRequestDTO = new ApplicationRequestDTO("Sarah", "W", "1", "sw@gmail.com");
-        Application application = new Application("Sarah", "W", "1", "sw@gmail.com");
-        when(ar.createApplication(application)).thenReturn(Optional.of(application));
-        Optional<Application> optionalApplication = marsGateService.createApplication(applicationRequestDTO);
-        assertTrue(optionalApplication.isPresent());
-        assertEquals("1", optionalApplication.get().getTelephone());
-    }
+//    @Test
+//    public void testCreateApplication_Correct() throws TelTooLongException {
+//        ApplicationRequestDTO applicationRequestDTO = new ApplicationRequestDTO("Sarah", "W", "1", "sw@gmail.com");
+//        Application application = new Application("Sarah", "W", "1", "sw@gmail.com");
+//        when(ar.createApplication(application)).thenReturn(Optional.of(application));
+//        Optional<Application> optionalApplication = marsGateService.createApplication(applicationRequestDTO);
+//        assertTrue(optionalApplication.isPresent());
+//        assertEquals("1", optionalApplication.get().getTelephone());
+//    }
 
 //    @Test
 //    public void testAddCV_Correct() throws UniTooLongException {

@@ -13,7 +13,6 @@ public class ApplicationRequestDTO {
     @NotNull
     private String lastname;
     private int experience;
-
     @Size(max = 100)
     private String university;
     @Size(max = 25, min = 1)
@@ -31,7 +30,7 @@ public class ApplicationRequestDTO {
         this.telephone = telephone;
         this.email = email;
     }
-//
+
 //    public ApplicationRequestDTO(Date birthdate, int experience, String university) {
 //        this.birthdate = birthdate;
 //        this.experience = experience;

@@ -2,7 +2,9 @@ package com.example.marsgate.service.impl;
 
 import com.example.marsgate.entity.Application;
 import com.example.marsgate.repository.RepositoryInterface;
-import com.example.marsgate.requestdtos.ApplicationRequestDTO;
+import com.example.marsgate.requestdtos.CvRequestDTO;
+import com.example.marsgate.requestdtos.EssayRequestDTO;
+import com.example.marsgate.requestdtos.PersonalDetailsRequestDTO;
 import com.example.marsgate.service.ServiceInterface;
 import com.example.marsgate.service.exceptions.EssayTooLongException;
 import com.example.marsgate.service.exceptions.TelTooLongException;
@@ -25,30 +27,30 @@ public class MarsGateService implements ServiceInterface {
         this.applicationMapper = applicationMapper;
     }
 
-    public Optional<Application> createApplication(ApplicationRequestDTO applicationRequestDTO) throws TelTooLongException {
-        Application application = applicationMapper.mapRequestToEntity(applicationRequestDTO);
+    public Optional<Application> createApplication(PersonalDetailsRequestDTO personalDetailsRequestDTO) throws TelTooLongException {
+        Application application = applicationMapper.mapPersonalDetailsToEntity(personalDetailsRequestDTO);
         return ar.createApplication(application);
     }
 
-    public Optional<Application> addCV(ApplicationRequestDTO applicationRequestDTO) throws UniTooLongException {
+    public Optional<Application> addCV(CvRequestDTO cvRequestDTO) throws UniTooLongException {
 //        if(application.getUniversity().length() > 100) {
 //            throw new UniTooLongException();
 //        }
 //        if(application.getUniversity().equals("")) {
 //            application.setUniversity("no degree entered");
 //        }
-        Application application = applicationMapper.mapRequestToEntity(applicationRequestDTO);
+        Application application = applicationMapper.mapCvToEntity(cvRequestDTO);
         return ar.addCV(application);
     }
 
-    public Optional<Application> addEssay(ApplicationRequestDTO applicationRequestDTO) throws EssayTooLongException {
+    public Optional<Application> addEssay(EssayRequestDTO essayRequestDTO) throws EssayTooLongException {
 //        if(application.getEssay().length() > 1000) {
 //            throw new EssayTooLongException();
 //        }
 //        if(application.getEssay().equals("")) {
 //            application.setEssay("no essay added");
 //        }
-        Application application = applicationMapper.mapRequestToEntity(applicationRequestDTO);
+        Application application = applicationMapper.mapEssayToEntity(essayRequestDTO);
         ar.addEssay(application);
         return ar.getApplicationById(application.getId());
     }
