@@ -6,6 +6,7 @@ import com.example.marsgate.requestdtos.ApplicationRequestDTO;
 import com.example.marsgate.service.exceptions.TelTooLongException;
 import com.example.marsgate.service.impl.MarsGateService;
 import com.example.marsgate.service.mappers.ApplicationMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,16 +25,20 @@ public class MarsGateServiceTest {
 
     @Mock
     RepositoryInterface ar;
-    @Mock
+
     ApplicationMapper applicationMapper;
-    @InjectMocks
     MarsGateService marsGateService;
+
+    @BeforeEach
+    void setUp() {
+        applicationMapper = new ApplicationMapper();
+        marsGateService = new MarsGateService(ar,applicationMapper);
+    }
 
     @Test
     public void testCreateApplication_Correct() throws TelTooLongException {
         ApplicationRequestDTO applicationRequestDTO = new ApplicationRequestDTO("Sarah", "W", "1", "sw@gmail.com");
         Application application = new Application("Sarah", "W", "1", "sw@gmail.com");
-        when(applicationMapper.mapRequestToEntity(applicationRequestDTO)).thenReturn(application);
         when(ar.createApplication(application)).thenReturn(Optional.of(application));
         Optional<Application> optionalApplication = marsGateService.createApplication(applicationRequestDTO);
         assertTrue(optionalApplication.isPresent());
