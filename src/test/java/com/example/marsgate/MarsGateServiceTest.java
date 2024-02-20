@@ -3,6 +3,7 @@ package com.example.marsgate;
 import com.example.marsgate.entity.Application;
 import com.example.marsgate.repository.RepositoryInterface;
 import com.example.marsgate.requestdtos.ApplicationRequestDTO;
+import com.example.marsgate.requestdtos.PersonalDetailsRequestDTO;
 import com.example.marsgate.service.exceptions.TelTooLongException;
 import com.example.marsgate.service.impl.MarsGateService;
 import com.example.marsgate.service.mappers.ApplicationMapper;
@@ -32,18 +33,18 @@ public class MarsGateServiceTest {
     @BeforeEach
     void setUp() {
         applicationMapper = new ApplicationMapper();
-        marsGateService = new MarsGateService(ar,applicationMapper);
+        marsGateService = new MarsGateService(ar, applicationMapper);
     }
 
-//    @Test
-//    public void testCreateApplication_Correct() throws TelTooLongException {
-//        ApplicationRequestDTO applicationRequestDTO = new ApplicationRequestDTO("Sarah", "W", "1", "sw@gmail.com");
-//        Application application = new Application("Sarah", "W", "1", "sw@gmail.com");
-//        when(ar.createApplication(application)).thenReturn(Optional.of(application));
-//        Optional<Application> optionalApplication = marsGateService.createApplication(applicationRequestDTO);
-//        assertTrue(optionalApplication.isPresent());
-//        assertEquals("1", optionalApplication.get().getTelephone());
-//    }
+    @Test
+    public void testCreateApplication_Correct() throws TelTooLongException {
+        PersonalDetailsRequestDTO personalDetailsRequestDTO = new PersonalDetailsRequestDTO("Sarah", "W", "sw@gmail.com", "0151");
+        Application application = applicationMapper.mapPersonalDetailsToEntity(personalDetailsRequestDTO);
+        when(ar.createApplication(application)).thenReturn(Optional.of(application));
+        Optional<Application> optionalApplication = marsGateService.createApplication(personalDetailsRequestDTO);
+        assertTrue(optionalApplication.isPresent());
+        assertEquals("0151", optionalApplication.get().getTelephone());
+    }
 
 //    @Test
 //    public void testAddCV_Correct() throws UniTooLongException {
