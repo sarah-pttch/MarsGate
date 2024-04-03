@@ -32,7 +32,7 @@ public class MarsGateService implements ServiceInterface {
         return ar.createApplication(application);
     }
 
-    public Optional<Application> addCV(CvRequestDTO cvRequestDTO) throws UniTooLongException {
+    public Optional<Application> addCV(CvRequestDTO cvRequestDTO) {
 //        if(application.getUniversity().length() > 100) {
 //            throw new UniTooLongException();
 //        }

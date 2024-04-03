@@ -14,7 +14,7 @@ public interface ServiceInterface {
 
     Optional<Application> createApplication(PersonalDetailsRequestDTO personalDetailsRequestDTO) throws TelTooLongException;
 
-    Optional<Application> addCV(CvRequestDTO cvRequestDTO) throws UniTooLongException;
+    Optional<Application> addCV(CvRequestDTO cvRequestDTO);
 
     Optional<Application> addEssay(EssayRequestDTO essayRequestDTO) throws EssayTooLongException;
 

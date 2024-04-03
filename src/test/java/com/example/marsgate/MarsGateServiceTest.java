@@ -3,6 +3,7 @@ package com.example.marsgate;
 import com.example.marsgate.entity.Application;
 import com.example.marsgate.repository.RepositoryInterface;
 import com.example.marsgate.requestdtos.ApplicationRequestDTO;
+import com.example.marsgate.requestdtos.CvRequestDTO;
 import com.example.marsgate.requestdtos.PersonalDetailsRequestDTO;
 import com.example.marsgate.service.exceptions.TelTooLongException;
 import com.example.marsgate.service.impl.MarsGateService;
@@ -14,6 +15,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.sql.Date;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,14 +50,15 @@ public class MarsGateServiceTest {
     }
 
 //    @Test
-//    public void testAddCV_Correct() throws UniTooLongException {
-//        Application application = new Application(new Date(1988-02-12), 9, "");
+//    public void testAddCV_Correct() {
+//        CvRequestDTO cvRequestDTO = new CvRequestDTO(1, new Date(1988-02-12), 9, "Bsc");
+//        Application application = applicationMapper.mapCvToEntity(cvRequestDTO);
 //        when(ar.addCV(application)).thenReturn(Optional.of(application));
-//        Optional<Application> optionalApplication = marsGateService.addCV(application);
+//        Optional<Application> optionalApplication = marsGateService.addCV(cvRequestDTO);
 //        assertTrue(optionalApplication.isPresent());
-//        assertEquals("no degree entered", optionalApplication.get().getUniversity());
+//        assertEquals("Bsc", optionalApplication.get().getUniversity());
 //    }
-//
+
 //    @Test
 //    public void testAddEssay_Correct() throws EssayTooLongException {
 //        Application application = new Application("");
@@ -63,24 +67,24 @@ public class MarsGateServiceTest {
 //        assertTrue(optionalApplication.isPresent());
 //        assertEquals("no essay added", optionalApplication.get().getEssay());
 //    }
-//
-//    @Test
-//    public void testFindApplications_Correct() {
-//        when(ar.getApplicationsByEmail("sw@gmail.com")).thenReturn(Collections.emptyList());
-//        assertEquals("[]", marsGateService.findApplications("sw@gmail.com"));
-//    }
-//
-//    @Test
-//    public void testOpenApplication_Correct() {
-//        Application application = new Application(new Date(1988-02-12), 9, null);
-//        when(ar.getApplicationById(1)).thenReturn(Optional.of(application));
-//        assertEquals("ApplicationCV", marsGateService.openApplication(1));
-//    }
-//
-//    @Test
-//    public void testDeleteApplication_Correct() {
-//        doNothing().when(ar).deleteApplicationById(1);
-//        marsGateService.deleteApplication(1);
-//        verify(ar, times(1)).deleteApplicationById(1);
-//    }
+
+    @Test
+    public void testFindApplications_Correct() {
+        when(ar.getApplicationsByEmail("sw@gmail.com")).thenReturn(Collections.emptyList());
+        assertEquals("[]", marsGateService.findApplications("sw@gmail.com"));
+    }
+
+    @Test
+    public void testOpenApplication_Correct() {
+        Application application = new Application(new Date(1988-02-12), 9, null);
+        when(ar.getApplicationById(1)).thenReturn(Optional.of(application));
+        assertEquals("ApplicationCV", marsGateService.openApplication(1));
+    }
+
+    @Test
+    public void testDeleteApplication_Correct() {
+        doNothing().when(ar).deleteApplicationById(1);
+        marsGateService.deleteApplication(1);
+        verify(ar, times(1)).deleteApplicationById(1);
+    }
 }
