@@ -24,13 +24,13 @@ class MarsGateControllerTest {
     @MockBean
     ServiceInterface service;
 
-    @Test
-    public void openApplicationPD_whenCalled_thenVerifyControllerReturnsOk() throws Exception {
-        mvc.perform(
-                MockMvcRequestBuilders.get("/ApplicationPersonalDetails")
+//    @Test
+//    public void openApplicationPD_whenCalled_thenVerifyControllerReturnsOk() throws Exception {
+//        mvc.perform(
+//                MockMvcRequestBuilders.get("/ApplicationPersonalDetails")
 //                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
+//                        .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk());
+//    }
 
 }

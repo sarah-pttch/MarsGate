@@ -80,16 +80,6 @@ public class MarsGateController {
         }
     }
 
-//    @GetMapping("/existingApplications")
-//    @ResponseBody
-//    public String findExistingApplications(@RequestParam String email) {
-//        String results = service.findApplications(email);
-//        if(results.equals("[]")) {
-//            return "There are no applications for your e-mail address.";
-//        }
-//        return results;
-//    }
-
     @GetMapping("/existingApplications")
     public String findExistingApplications(@RequestParam String email, Model model) {
         String results = service.findApplications(email);

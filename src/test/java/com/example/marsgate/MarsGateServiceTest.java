@@ -2,7 +2,6 @@ package com.example.marsgate;
 
 import com.example.marsgate.entity.Application;
 import com.example.marsgate.repository.RepositoryInterface;
-import com.example.marsgate.requestdtos.ApplicationRequestDTO;
 import com.example.marsgate.requestdtos.CvRequestDTO;
 import com.example.marsgate.requestdtos.PersonalDetailsRequestDTO;
 import com.example.marsgate.service.exceptions.TelTooLongException;
@@ -11,7 +10,6 @@ import com.example.marsgate.service.mappers.ApplicationMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -23,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 //TODO: If you want to run an e2e test then you need to start a in memory db when running these tests.
-//Types of tests. Unit, integration and e2e tests.
 @ExtendWith(MockitoExtension.class)
 public class MarsGateServiceTest {
 

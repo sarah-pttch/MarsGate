@@ -24,8 +24,6 @@ public class ApplicationRepository implements RepositoryInterface {
         try {
         return Optional.of(em.merge(application));
         } catch (Exception e) {
-            //TODO: introduce logging library.
-           // Logger.error("failed to create application", application.getEmail());
             Log.error("Failed to create application");
             return Optional.empty();
         }
@@ -58,9 +56,9 @@ public class ApplicationRepository implements RepositoryInterface {
     }
 
     public List<Application> getApplicationsByEmail(String email) {
-        TypedQuery<Application> getAppByFnLn = em.createNamedQuery("findapplications", Application.class);
-        getAppByFnLn.setParameter("email", email);
-        return getAppByFnLn.getResultList();
+        TypedQuery<Application> getAppByEmail = em.createNamedQuery("findapplications", Application.class);
+        getAppByEmail.setParameter("email", email);
+        return getAppByEmail.getResultList();
     }
 
 }

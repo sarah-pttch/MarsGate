@@ -25,9 +25,7 @@ public class Application {
     private String email;
     @Column(columnDefinition = "varchar(25) default 'no telephone number entered'")
     private String telephone;
-    //    @Column(columnDefinition = "date default '1900-01-01'")
     private Date birthdate;
-//    @Column(columnDefinition = "integer default 0")
     private int experience;
     @Column(columnDefinition = "varchar(100) default 'no degree entered'")
     private String university;
