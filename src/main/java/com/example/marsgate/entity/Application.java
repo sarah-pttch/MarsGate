@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@NamedQuery(name = "findapplications", query = "select a from Application a where a.email=:email")
+@NamedQuery(name = "findApplications", query = "select a from Application a where a.email=:email")
 @NamedQuery(name = "updateCV", query = "update Application a set a.experience=:experience, a.university=:university, a.birthdate=:birthdate where a.Id=:Id")
 @NamedQuery(name = "updateEssay", query = "update Application a set a.essay=:essay where a.Id=:Id")
 public class Application {
@@ -23,13 +23,10 @@ public class Application {
     @NotNull
     @Email
     private String email;
-    @Column(columnDefinition = "varchar(25) default 'no telephone number entered'")
     private String telephone;
     private Date birthdate;
     private int experience;
-    @Column(columnDefinition = "varchar(100) default 'no degree entered'")
     private String university;
-    @Column(columnDefinition = "varchar(1000) default 'no essay added'")
     private String essay;
 
     public Application(){}
@@ -104,11 +101,19 @@ public class Application {
     }
 
     public void setUniversity(String university) {
-        this.university = university;
+        if(university.equals("")) {
+            this.university = "no degree entered";
+        } else {
+            this.university = university;
+        }
     }
 
     public void setTelephone(String telephone) {
-        this.telephone = telephone;
+        if(telephone.equals("")) {
+            this.telephone = "no phone number entered";
+        } else {
+            this.telephone = telephone;
+        }
     }
 
     public void setEmail(String email) {
@@ -120,7 +125,11 @@ public class Application {
     }
 
     public void setEssay(String essay) {
-        this.essay = essay;
+        if(essay.equals("")) {
+            this.essay = "no essay added";
+        } else {
+            this.essay = essay;
+        }
     }
 
     @Override

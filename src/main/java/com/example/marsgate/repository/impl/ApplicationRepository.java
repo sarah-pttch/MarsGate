@@ -47,7 +47,12 @@ public class ApplicationRepository implements RepositoryInterface {
     }
 
     public Optional<Application> getApplicationById(int id) {
-        return Optional.of(em.find(Application.class, id));
+        try {
+            return Optional.of(em.find(Application.class, id));
+        } catch (Exception e) {
+            Log.error("Failed to retrieve application");
+            return Optional.empty();
+        }
     }
 
     public void deleteApplicationById(int id) {
@@ -56,7 +61,7 @@ public class ApplicationRepository implements RepositoryInterface {
     }
 
     public List<Application> getApplicationsByEmail(String email) {
-        TypedQuery<Application> getAppByEmail = em.createNamedQuery("findapplications", Application.class);
+        TypedQuery<Application> getAppByEmail = em.createNamedQuery("findApplications", Application.class);
         getAppByEmail.setParameter("email", email);
         return getAppByEmail.getResultList();
     }

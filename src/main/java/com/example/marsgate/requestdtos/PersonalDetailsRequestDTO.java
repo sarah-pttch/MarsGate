@@ -2,7 +2,6 @@ package com.example.marsgate.requestdtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 public class PersonalDetailsRequestDTO {
 
@@ -13,7 +12,6 @@ public class PersonalDetailsRequestDTO {
     @NotNull
     @Email
     private String email;
-    @Size(max = 25, min = 1)
     private String telephone;
 
     public PersonalDetailsRequestDTO(String firstname, String lastname, String email, String telephone) {

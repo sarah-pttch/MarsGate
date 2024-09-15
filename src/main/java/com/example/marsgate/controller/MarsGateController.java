@@ -5,9 +5,6 @@ import com.example.marsgate.entity.Application;
 import com.example.marsgate.requestdtos.CvRequestDTO;
 import com.example.marsgate.requestdtos.EssayRequestDTO;
 import com.example.marsgate.requestdtos.PersonalDetailsRequestDTO;
-import com.example.marsgate.service.exceptions.EssayTooLongException;
-import com.example.marsgate.service.exceptions.TelTooLongException;
-import com.example.marsgate.service.exceptions.UniTooLongException;
 import com.example.marsgate.service.ServiceInterface;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,30 +37,30 @@ public class MarsGateController {
     }
 
     @PostMapping("/applicationCV")
-    public String savePersonalDetails(@Valid PersonalDetailsRequestDTO personalDetailsRequestDTO, Model model) throws TelTooLongException {
+    public String savePersonalDetails(@Valid PersonalDetailsRequestDTO personalDetailsRequestDTO, Model model) {
         Log.info("Starting creation of application");
         Optional<Application> newApplication = service.createApplication(personalDetailsRequestDTO);
         if (newApplication.isPresent()) {
             model.addAttribute("Id", newApplication.get().getId());
             return "ApplicationCV";
         } else {
-            return null;
+            return "DBError";
         }
     }
 
     @PostMapping("/applicationEssay")
-    public String saveCv(@Valid CvRequestDTO cvRequestDTO, Model model) throws UniTooLongException {
+    public String saveCv(@Valid CvRequestDTO cvRequestDTO, Model model) {
         Optional<Application> updatedApplication = service.addCV(cvRequestDTO);
         if(updatedApplication.isPresent()) {
             model.addAttribute("Id", updatedApplication.get().getId());
             return "ApplicationEssay";
         } else {
-            return null;
+            return "DBError";
         }
     }
 
     @PostMapping("/applicationConfirmation")
-    public String saveEssay(@Valid EssayRequestDTO essayRequestDTO, Model model) throws EssayTooLongException {
+    public String saveEssay(@Valid EssayRequestDTO essayRequestDTO, Model model) {
         Optional<Application> summary = service.addEssay(essayRequestDTO);
         if(summary.isPresent()) {
             model.addAttribute("firstname", summary.get().getFirstname());
@@ -76,7 +73,7 @@ public class MarsGateController {
             model.addAttribute("essay", summary.get().getEssay());
             return "ApplicationConfirmation";
         } else {
-            return null;
+            return "DBError";
         }
     }
 

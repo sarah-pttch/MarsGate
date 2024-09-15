@@ -23,36 +23,9 @@
   <label for="telephone">Telephone number:</label>
   <input id="telephone" type="text" name="telephone"> <br>
 
-  <!--    <input type="hidden" value="0000-00-00" name="birthdate">-->
-  <!--    <input type="hidden" value="0" name="experience">-->
-  <!--    <input type="hidden" name="university">-->
-  <!--    <input type="hidden" name="essay">-->
-
   <button type="submit">Save and Proceed</button>
   <button type="submit" formaction="/marsgate" formmethod="get">Cancel Application</button>
 </form>
-
-<script>
-  pageOne.onsubmit = async (e) => {
-    e.preventDefault();
-
-    var pD = new FormData(pageOne);
-    pD.append("university", "");
-    pD.append("experience", "0");
-    pD.append("birthdate", "0000-00-00");
-    pD.append("essay", "");
-    var xhrForm = new XMLHttpRequest();
-    xhrForm.open("POST", "/marsgate/applicationCV");
-    xhrForm.send(pD);
-
-    // let response = await fetch('/marsgate/applicationCV', {
-    //   method: 'POST',
-    //   body: new FormData(pageOne),
-    //   redirect: "follow"
-    // });
-  };
-
-</script>
 
 </body>
 </html>
